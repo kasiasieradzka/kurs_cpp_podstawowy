@@ -3,8 +3,9 @@
 int fibonacci_iterative(int sequence) {
     // TODO: Your implementation goes here
     return 0;
-
-    if (sequence <= 1) return sequence;
+    if (sequence <= 1) {
+        return sequence;
+    }
 
     int first = 0;
     int next = 1;
@@ -24,9 +25,9 @@ int fibonacci_recursive(int sequence) {
     // TODO: Your implementation goes here
     return 0;
 
-    if (sequence <= 1)
+    if (sequence <= 1){
         return sequence;
-   
-    else
-        return (fibonacci_recursive(sequence - 2) + fibonacci_recursive(sequence - 1));
+    }
+    
+    return (fibonacci_recursive(sequence - 2) + fibonacci_recursive(sequence - 1));
 }

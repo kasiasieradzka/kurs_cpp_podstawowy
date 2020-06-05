@@ -1,9 +1,7 @@
 #pragma once
 
 int NWD(int lhs, int rhs) {
-    // TODO: Implement me :)
-    return -1;
-
+    
     if (rhs == 0){
         return lhs;
     }

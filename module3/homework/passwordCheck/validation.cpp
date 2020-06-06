@@ -15,31 +15,31 @@ enum class ErrorCode {
 std::string getErrorMessage (ErrorCode message) {
     switch (message)
     {
-        case ErrorCode::Ok
+        case ErrorCode::Ok:
         {
             return "Poprawnie wprowadzono nowe haslo \n";
         }
-        case ErrorCode::PasswordNeedsAtLeastNineCharacters
+        case ErrorCode::PasswordNeedsAtLeastNineCharacters:
         {
             return "Haslo musi zawierac co najmniej 9 znakow";
         }
-        case ErrorCode::PasswordNeedsAtLeastOneNumber
+        case ErrorCode::PasswordNeedsAtLeastOneNumber:
         {
             return "Haslo musi zawierac co najmniej jedna cyfre";
         }   
-        case ErrorCode::PasswordNeedsAtLeastOneSpecialCharacter
+        case ErrorCode::PasswordNeedsAtLeastOneSpecialCharacter:
         {
             return "Haslo musi zawierac co najmniej jeden znak specjalny";
         }
-        case ErrorCode::PasswordNeedsAtLeastOneUppercaseLetter
+        case ErrorCode::PasswordNeedsAtLeastOneUppercaseLetter:
         {
             return "Haslo musi zawierac co najmniej jedna duza litere";
         }
-        case ErrorCode::PasswordsDoesNotMatch
+        case ErrorCode::PasswordsDoesNotMatch:
         {
             return "Wprowadzone hasla nie zgadzaja sie";
         }
-        default
+        default:
         {
             return "Niezdefiniowany blad";
         }
@@ -58,13 +58,13 @@ ErrorCode checkPasswordRules (const std::string& password) {
         getErrorMessage(ErrorCode::PasswordNeedsAtLeastNineCharacters);
     }
     //rule2
-    for (int i = 0; i < password.length(); i++)
+    for (unsigned int i = 0; i < password.length(); i++)
     {
         char temporary;
         password[i] = temporary;
 
         if (temporary >= 48 && temporary <= 57) {
-            return getErrorMessage(ErrorCodeOk); 
+            return getErrorMessage(ErrorCode::Ok); 
         }
         else {
             getErrorMessage(ErrorCode::PasswordNeedsAtLeastOneNumber);
@@ -72,7 +72,7 @@ ErrorCode checkPasswordRules (const std::string& password) {
 
     }
     //rule3
-    for (int i = 0; i < password.length(); i++)
+    for (unsigned int i = 0; i < password.length(); i++)
     {
         char temporary;
         password[i] = temporary;
@@ -86,7 +86,7 @@ ErrorCode checkPasswordRules (const std::string& password) {
 
     }
     //rule4
-    for (int i = 0; i < password.length(); i++)
+    for (unsigned int i = 0; i < password.length(); i++)
     {
         char temporary;
         password[i] = temporary;
@@ -102,11 +102,10 @@ ErrorCode checkPasswordRules (const std::string& password) {
 }
 
 ErrorCode checkPassword (const std::string& password, const std::string& furtherPassword) {
-    if (doesPasswordsMatch) {
+    if (doesPasswordsMatch(password, furtherPassword)) {
         return checkPasswordRules(password);
     }
     else {
         return ErrorCode::PasswordsDoesNotMatch;
     }
 }
-

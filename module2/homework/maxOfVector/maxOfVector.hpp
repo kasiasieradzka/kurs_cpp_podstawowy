@@ -14,4 +14,5 @@ int maxOfVector(const std::vector<int>& vec) {
             maxValue = el;
         }
     }
+    return maxValue;
 }

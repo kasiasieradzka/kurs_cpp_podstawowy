@@ -2,7 +2,14 @@
 #include <vector>
 
 int addEven(const std::vector<int>& numbers) {
-    // TODO: Your implementation goes here
-    // Below return is only to make this function compile now
-    return -1;
+    int sumOfEvenNumbers = 0;
+
+    for (auto i = 0; i < numbers.size(); i++)
+    {
+        if (numbers[i] % 2 == 0)
+        {
+            sumOfEvenNumbers += numbers[i];
+        }
+        return sumOfEvenNumbers;
+    }
 }

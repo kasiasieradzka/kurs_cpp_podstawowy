@@ -1,6 +1,5 @@
 #include "validation.hpp"
 #include <cstdlib>
-#include <ctime>
 #include <iostream>
 
 enum class ErrorCode {
@@ -51,13 +50,12 @@ bool doesPasswordsMatch (const std::string& password, const std::string& further
 }
 
 ErrorCode checkPasswordRules (const std::string& password) {
-    //rule1
-    if (password.length() <= 8)
+    if (password.length() < 9)
     {
         getErrorMessage(ErrorCode::PasswordNeedsAtLeastNineCharacters);
     }
-    //rule2
-    for (unsigned int i = 0; i < password.length(); i++)
+    
+    for (size_t i = 0; i < password.length(); i++)
     {
         char temporary;
         password[i] = temporary;
@@ -70,8 +68,8 @@ ErrorCode checkPasswordRules (const std::string& password) {
         }
 
     }
-    //rule3
-    for (unsigned int i = 0; i < password.length(); i++)
+    
+    for (size_t i = 0; i < password.length(); i++)
     {
         char temporary;
         password[i] = temporary;
@@ -84,8 +82,8 @@ ErrorCode checkPasswordRules (const std::string& password) {
         }
 
     }
-    //rule4
-    for (unsigned int i = 0; i < password.length(); i++)
+    
+    for (size_t i = 0; i < password.length(); i++)
     {
         char temporary;
         password[i] = temporary;
@@ -96,15 +94,11 @@ ErrorCode checkPasswordRules (const std::string& password) {
         else {
             return getErrorMessage(ErrorCode::PasswordNeedsAtLeastOneUppercaseLetter);
         }
-
     }
 }
 
 ErrorCode checkPassword (const std::string& password, const std::string& furtherPassword) {
     if (doesPasswordsMatch(password, furtherPassword)) {
         return checkPasswordRules(password);
-    }
-    else {
-        return ErrorCode::PasswordsDoesNotMatch;
     }
 }

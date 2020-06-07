@@ -1,6 +1,4 @@
 #include "validation.hpp"
-#include <cstdlib>
-#include <iostream>
 
 enum class ErrorCode {
     Ok,
@@ -11,7 +9,7 @@ enum class ErrorCode {
     PasswordsDoesNotMatch
 };
 
-std::string getErrorMessage (ErrorCode message) {
+std::string getErrorMessage (const ErrorCode message) {
     switch (message)
     {
         case ErrorCode::Ok:
@@ -65,10 +63,14 @@ ErrorCode checkPasswordRules (const std::string& password) {
     if (std::none_of(password.begin(), password.end(), [](unsigned char letter) { return std::isupper(letter); })) {
         return ErrorCode::PasswordNeedsAtLeastOneUppercaseLetter;
     }
+    return ErrorCode::Ok;
 }
 
 ErrorCode checkPassword (const std::string& password, const std::string& furtherPassword) {
     if (doesPasswordsMatch(password, furtherPassword)) {
         return checkPasswordRules(password);
+    }
+    else {
+        return ErrorCode::PasswordsDoesNotMatch;
     }
 }

@@ -47,8 +47,7 @@ std::string getErrorMessage (ErrorCode message) {
 }
 
 bool doesPasswordsMatch (const std::string& password, const std::string& furtherPassword) {
-    if (password == furtherPassword)
-        return true;
+    return password == furtherPassword;
 }
 
 ErrorCode checkPasswordRules (const std::string& password) {
@@ -81,7 +80,7 @@ ErrorCode checkPasswordRules (const std::string& password) {
             return getErrorMessage(ErrorCode::Ok);
         }
         else {
-            getErrorMessage(ErrorCode::PasswordNeedsAtLeastOneSpecialCharacter);
+            return getErrorMessage(ErrorCode::PasswordNeedsAtLeastOneSpecialCharacter);
         }
 
     }
@@ -95,7 +94,7 @@ ErrorCode checkPasswordRules (const std::string& password) {
             return getErrorMessage(ErrorCode::Ok);
         }
         else {
-            getErrorMessage(ErrorCode::PasswordNeedsAtLeastOneUppercaseLetter);
+            return getErrorMessage(ErrorCode::PasswordNeedsAtLeastOneUppercaseLetter);
         }
 
     }

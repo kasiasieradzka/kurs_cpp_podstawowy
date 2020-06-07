@@ -48,7 +48,7 @@ bool doesPasswordsMatch (const std::string& password, const std::string& further
 }
 
 ErrorCode checkPasswordRules (const std::string& password) {
-    if (password.length() < 9) {
+    if (password.length() < minCharInPassword) {
         return ErrorCode::PasswordNeedsAtLeastNineCharacters;
     }
     

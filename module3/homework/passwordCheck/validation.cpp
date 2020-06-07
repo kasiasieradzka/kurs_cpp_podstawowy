@@ -16,31 +16,31 @@ std::string getErrorMessage (ErrorCode message) {
     {
         case ErrorCode::Ok:
         {
-            return "Poprawnie wprowadzono nowe haslo \n";
+            return "OK";
         }
         case ErrorCode::PasswordNeedsAtLeastNineCharacters:
         {
-            return "Haslo musi zawierac co najmniej 9 znakow";
+            return "Password needs at least nine characters";
         }
         case ErrorCode::PasswordNeedsAtLeastOneNumber:
         {
-            return "Haslo musi zawierac co najmniej jedna cyfre";
+            return "Password needs at least one number";
         }   
         case ErrorCode::PasswordNeedsAtLeastOneSpecialCharacter:
         {
-            return "Haslo musi zawierac co najmniej jeden znak specjalny";
+            return "Password needs at least one special character";
         }
         case ErrorCode::PasswordNeedsAtLeastOneUppercaseLetter:
         {
-            return "Haslo musi zawierac co najmniej jedna duza litere";
+            return "Password needs at least one uppercase letter";
         }
         case ErrorCode::PasswordsDoesNotMatch:
         {
-            return "Wprowadzone hasla nie zgadzaja sie";
+            return "Passwords don't match";
         }
         default:
         {
-            return "Niezdefiniowany blad";
+            return "Unknow error code";
         }
     }
 }
@@ -50,50 +50,20 @@ bool doesPasswordsMatch (const std::string& password, const std::string& further
 }
 
 ErrorCode checkPasswordRules (const std::string& password) {
-    if (password.length() < 9)
-    {
-        getErrorMessage(ErrorCode::PasswordNeedsAtLeastNineCharacters);
+    if (password.length() < 9) {
+        return ErrorCode::PasswordNeedsAtLeastNineCharacters;
     }
     
-    for (size_t i = 0; i < password.length(); i++)
-    {
-        char temporary;
-        password[i] = temporary;
-
-        if (temporary >= 48 && temporary <= 57) {
-            return getErrorMessage(ErrorCode::Ok); 
-        }
-        else {
-            getErrorMessage(ErrorCode::PasswordNeedsAtLeastOneNumber);
-        }
-
+    if (std::none_of(password.begin(), password.end(), [](unsigned char letter) { return std::isdigit(letter); })) {
+        return ErrorCode::PasswordNeedsAtLeastOneNumber;
     }
-    
-    for (size_t i = 0; i < password.length(); i++)
-    {
-        char temporary;
-        password[i] = temporary;
-
-        if ((temporary >= 32 && temporary <= 47) || (temporary >= 58 && temporary <= 64) || (temporary >= 91 && temporary <= 96) || (temporary >= 123 && temporary <= 126)) {
-            return getErrorMessage(ErrorCode::Ok);
-        }
-        else {
-            return getErrorMessage(ErrorCode::PasswordNeedsAtLeastOneSpecialCharacter);
-        }
-
+        
+    if (std::none_of(password.begin(), password.end(), [](unsigned char letter) { return std::ispunct(letter); })) {
+        return ErrorCode::PasswordNeedsAtLeastOneSpecialCharacter;
     }
-    
-    for (size_t i = 0; i < password.length(); i++)
-    {
-        char temporary;
-        password[i] = temporary;
-
-        if (temporary >= 65 && temporary <= 90) {
-            return getErrorMessage(ErrorCode::Ok);
-        }
-        else {
-            return getErrorMessage(ErrorCode::PasswordNeedsAtLeastOneUppercaseLetter);
-        }
+        
+    if (std::none_of(password.begin(), password.end(), [](unsigned char letter) { return std::isupper(letter); })) {
+        return ErrorCode::PasswordNeedsAtLeastOneUppercaseLetter;
     }
 }
 

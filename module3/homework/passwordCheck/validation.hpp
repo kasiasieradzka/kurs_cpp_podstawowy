@@ -1,5 +1,9 @@
 #pragma once
+#include <algorithm>
+#include <iostream>
 #include <string>
+
+const int minCharInPassword = 9;
 
 enum class ErrorCode {
     Ok,

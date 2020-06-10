@@ -6,10 +6,12 @@ int addEven(const std::vector<int>& numbers) {
 
     for (auto i = 0; i < numbers.size(); i++)
     {
-        if (numbers[i] % 2 == 0)
-        {
+        if (numbers[i] % 2 == 0) {
             sumOfEvenNumbers += numbers[i];
         }
-        return sumOfEvenNumbers;
+        else {
+            continue;
+        }
     }
+    return sumOfEvenNumbers;
 }
